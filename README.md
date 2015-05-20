@@ -24,15 +24,17 @@ How to use?
  **Clone project from github:**
 
 >  git  clone  git@github.com:AoX04/Guatauba.git
+
 >  cd Guatauba
 
 **Install dependencies:**
 >  NPM install
 
 **Run the app**
-> $ sudo node app.js
+> sudo node app.js
 
-The application will be runing on port 1337, and listening to port 25 for incoming emails.
+The web-mail application will be runing on port 1337, and listening to port 25 for incoming emails.
+Rigth now the app need to be run as sudo, since needs access to port 25, on the near future port binding support needs to be added.
 
 
 ---------
