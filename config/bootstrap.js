@@ -10,7 +10,6 @@
  */
 var SMTPServer = require('smtp-server').SMTPServer;
 var fs = require('fs');
-var Waterline = require('waterline');
 var MailParser = require("mailparser").MailParser;
 var mailparser = new MailParser();
 
@@ -23,7 +22,7 @@ module.exports.bootstrap = function(cb) {
 		//key: fs.readFileSync('certs/server.key'),
 		//cert: fs.readFileSync('certs/server.crt'),
 		onData: function(stream, session, callback){
-			stream.pipe(process.stdout); // print message to console
+			//stream.pipe(process.stdout); // print message to console
 			var data = "";
 			stream.setEncoding('utf8');
 			stream.on('data', function(chunk) {
@@ -33,10 +32,16 @@ module.exports.bootstrap = function(cb) {
 			});
 			
 			mailparser.on("end", function(mail_object){
-				console.log("From:", mail_object.from); //[{address:'sender@example.com',name:'Sender Name'}]
-				console.log("Subject:", mail_object.subject); // Hello world!
-				console.log("Text body:", mail_object.text); // How are you today?
-				Log.create(mail_object).exec(function (err,data){
+				
+				var email = {
+					text:mail_object.text,
+					subject:mail_object.subject,
+					from: mail_object.from[0].address,
+					to: mail_object.to[0].address,
+					headers:mail_object.headers
+				};
+				
+				Email.create(email).exec(function (err,data){
 					console.log(err);
 				});
 			});

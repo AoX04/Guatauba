@@ -17,10 +17,10 @@ module.exports = {
 		from:{
 			type:"email"
 		},
-		/*to:{
+		to:{
 			model:"user",
-			required:true
-		}*/
+			//required:true
+		}
 	}
 };
 
