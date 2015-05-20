@@ -19,7 +19,10 @@ module.exports = {
 		},
 		to:{
 			model:"user",
-			//required:true
+			required:true
+		},
+		headers:{
+			type:"json"
 		}
 	}
 };
