@@ -33,6 +33,8 @@ How to use?
 **Run the app**
 > sudo node app.js
 
+> // This is dangerous, the reason why sudo permissions is  needed, is because port 25 access is sudo protected, before the first stable release i will be adding a way configure a new port and rebind it to 25.
+
 The web-mail application will be runing on port 1337, and listening to port 25 for incoming emails.
 Rigth now the app need to be run as sudo, since needs access to port 25, on the near future port binding support needs to be added.
 
