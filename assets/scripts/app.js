@@ -11,10 +11,17 @@
 angular
   .module('yapp', [
     'ui.router',
-    'ngAnimate'
+    'ngAnimate',
+	'ng-token-auth'
   ])
-  .config(function($stateProvider, $urlRouterProvider) {
-
+  .config(function($stateProvider, $urlRouterProvider, $authProvider) {
+	
+	$authProvider.configure({
+		apiUrl: '/user',
+		emailSignInPath: '/login',
+		tokenValidationPath: '/me',
+	});
+	
     $urlRouterProvider.when('/dashboard', '/dashboard/overview');
     $urlRouterProvider.otherwise('/login');
 
