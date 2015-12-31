@@ -30,19 +30,25 @@ module.exports = {
 			password:req.param('password')
 		}
 		
-		console.log(user);
+		//console.log(user);
 		
 		User.findOne(user).exec(function(err,existingUser){
 			if(existingUser){
 				//delete existingUser.password;
 				//res.send(existingUser);
-				console.log('line 145:',existingUser);
+				//console.log('line 145:',existingUser);
 				var token = createToken(existingUser);
-				res.set({
+				var auth_data = {
 					"Uid":existingUser.email,
 					"Expiry":moment().add(3, 'days').unix(),
 					"Access-Token": token
-				})
+				}
+
+				req.session.Uid = auth_data.Uid;
+				req.session.Expiry = auth_data.Expiry;
+				req.session["Access-Token"] = auth_data["Access-Token"];
+
+				res.set(auth_data);
 				return res.send(existingUser);
 				
 			}else res.send(401);
@@ -57,12 +63,14 @@ module.exports = {
 	},
 	
 	me:function (req,res){
-		var token = req.headers['Access-Token'];
+		var token = req.session["Access-Token"];
+		//console.log("toej" token);
+        console.log("token: ", token);
         var payload = jwt.decode(token, sails.config.session.secret);
-		console.log("token: ", token);
+		console.log(payload.sub);
 		User.findOne(payload.sub).exec(function(err,user){
-			if(existingUser){
-				res.send(existingUser);	
+			if(user){
+				res.send(user);	
 			}else res.send(401);
 		});
 	}
