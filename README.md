@@ -49,3 +49,5 @@ Project goals
 - Intended for light use, low traffic.
 
 - A world where no one have to deal with postfix weird and awkward user creation.
+
+- Testing automatic build with https://github.com/nlf/node-github-hook
