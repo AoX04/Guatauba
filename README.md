@@ -50,4 +50,4 @@ Project goals
 
 - A world where no one have to deal with postfix weird and awkward user creation.
 
-- Testing automatic build with https://github.com/nlf/node-github-hook
+- Testing automatic build with https://github.com/nlf/node-github-hook 2
